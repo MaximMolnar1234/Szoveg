@@ -5,4 +5,11 @@ try:
 except IOError as hiba:
             print(hiba)
     
+# 1.feladat
+lista = []
+szoveg.split("**")
+print(szoveg.split("**"))
+
+
+
     
