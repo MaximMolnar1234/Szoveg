@@ -61,3 +61,54 @@ try:
 except IOError as ex:
     print(ex)
 
+# 4. feladat:
+lista4 = []
+
+for elem in lista3:
+    if (elem.lower().endswith("és") and elem not in lista4):
+        lista4.append(elem)
+
+print(lista4)        
+print()        
+try:
+    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
+        for elem in lista4:
+            fajl.write(elem + "\n")         
+except IOError as ex:
+    print(ex)
+
+# 5. feladat:
+lista5 = []
+
+for elem in lista3:
+    if (elem.lower().startswith("a") and (elem.lower() != "a" and  elem.lower() != "az")):
+        lista5.append(elem)
+
+print(len(lista5))
+print()
+# 6. feladat:
+try:
+    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
+        for elem in lista4:
+            fajl.write(str(szoveg.find("jövőben")) + "\n")         
+except IOError as ex:
+    print(ex)
+
+# 7. feladat:
+lista5 = []
+
+for elem in lista3:
+    elem = elem.lower()
+    if (len(elem) >= 10 and elem not in lista5 ):
+        lista5.append(elem)
+lista5.sort()
+print(lista5)
+
+try:
+    with open("output.txt","w",encoding = 'utf-8')as fajl:
+        for elem in lista5:
+            fajl.write(elem + "\n")         
+except IOError as ex:
+    print(ex)
+
+print("FELADAT VÉGE")
