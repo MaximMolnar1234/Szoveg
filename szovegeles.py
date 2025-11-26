@@ -7,7 +7,7 @@ except IOError as ex:
     print(ex)
 
     
-# 1. feladat
+# 1. feladat:
 lista=szoveg.strip().split('**')
 for i in range (len(lista)):
     lista[i]=lista[i].strip()
@@ -24,7 +24,7 @@ for i in range(db,len(lista)):
     lista.pop()
 #print(lista)
 
-# 2. feladat
+# 2. feladat:
 for i in range(len(lista)):
     lista[i]=lista[i].lower()
 
@@ -48,11 +48,16 @@ try:
 except IOError as ex:
     print(ex)
 
-'''
-szoveg_kis = szoveg.lower()
+# 3. feladat:
+szoveg = szoveg.replace (',' ,'').replace ('.','').replace ('*','')
+print(szoveg)
+lista3 = szoveg.strip().split(' ')
 
-for i in range(len(szoveg_kis)):
-    if ():
-'''
+print(lista3)    
 
-    
+try:
+    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
+         fajl.write (str(len(lista3))+"\n") 
+except IOError as ex:
+    print(ex)
+
