@@ -6,6 +6,48 @@ try:
 except IOError as ex:
     print(ex)
 
+def feladat1():
+    
+    lista=szoveg.strip().split('**')
+    for i in range (len(lista)):
+        lista[i]=lista[i].strip()
+    db = 0
+    for i in range (len(lista)):
+        if (len(lista[i]) > 0):
+            lista[db] = lista[i]
+            db += 1
+    for i in range(db,len(lista)):
+        lista.pop()
+    
+    for sz in lista:
+        kiir += sz + "\n"
+    
+    
+    return kiir
+
+try:
+    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
+        for elem in lista4:
+            fajl.write(feladat1())
+            #fajl.write(feladat2())
+            #fajl.write(feladat3())
+            #fajl.write(feladat4())
+            #fajl.write(feladat5())
+            #fajl.write(feladat6())
+            #fajl.write(feladat7())         
+
+
+except IOError as ex:
+    print(ex)
+
+
+
+
+
+
+
+
+
     
 # 1. feladat:
 lista=szoveg.strip().split('**')
