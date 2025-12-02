@@ -1,6 +1,6 @@
 import string
 
-#1. feladat
+# 1. feladat
 betu = ""
 
 try:
@@ -10,8 +10,8 @@ except IOError as ex:
     print(ex)
 
 betu = betu.strip()
-
-#2. feladat
+#=======================================================================
+# 2. feladat
 db_szam = 0
 db_betu = 0
 
@@ -24,6 +24,26 @@ for i in  betu:
         db_betu += 1
 
 print (db_szam)
-
 print (db_betu)
+#========================================================================
+# 3.feladat
+lista = []
+
+for i in betu:
+    if (i in string.punctuation and i not in lista):
+        lista.append(i)
+
+try:
+    with open("string_output.txt", "a" ,encoding = 'utf-8')as fajl:
+        for i in range(len(lista)):
+            
+            if (i < len(lista)-1):
+                fajl.write(lista[i] + ",")
+            else:
+                fajl.write(lista[i])    
+except IOError as ex:
+    print(ex)
+#========================================================================
+  
+
 
