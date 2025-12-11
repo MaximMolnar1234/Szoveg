@@ -53,6 +53,8 @@ for sor in sorok:
     sor_darabok = sor.split(' ')
     szavak.append(sor_darabok)
 
+    for s in sor_darabok:
+        szavak.append(s)
 
 for szo in szavak:
     if ("A" or '5' or '3' or 'b' or '?') in szo:
