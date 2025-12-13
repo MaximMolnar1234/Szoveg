@@ -8,7 +8,7 @@ def adat_beolvasas_fajlbol():
     
     # Szövegfájl beolvasása kivétel- és erőforrás-kezeléssel.
     try:
-        with open("F1\\scifi_input_v2.txt", encoding = 'utf-8')as fajl:
+        with open("scifi_input_v2.txt", encoding = 'utf-8')as fajl:
             szoveg = fajl.read()
 
     except IOError as ex:
@@ -121,7 +121,7 @@ adat_beolvasas_fajlbol()
 
 # Feladatok végrehajtása és az eredmények fájlba írása
 try:
-    with open("F1\\scifi_output.txt","w",encoding = 'utf-8')as fajl:
+    with open("scifi_output.txt","w",encoding = 'utf-8')as fajl:
         # 1. feladat
         fajl.write(f"1. feladat:\n\t{feladat1()}\n\n")
         
