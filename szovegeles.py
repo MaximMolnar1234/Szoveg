@@ -1,156 +1,213 @@
-szoveg = ""
-try:
-    with open("scifi_input_v2.txt",encoding = 'utf-8')as fajl:
-        szoveg = fajl.read()
-        #print(szoveg)
-except IOError as ex:
-    print(ex)
+#################################################
+###   FÜGGVÉNYEK                              ###
+#################################################
+
+def adat_beolvasas_fajlbol():
+    # A szoveg név globális változóként történő használatának lehetővé tétele (tartalmának módosíthatóságához)
+    global szoveg
+    
+    # Szövegfájl beolvasása kivétel- és erőforrás-kezeléssel.
+    try:
+        with open("F1\\scifi_input_v2.txt", encoding = 'utf-8')as fajl:
+            szoveg = fajl.read()
+
+    except IOError as ex:
+        print(ex)
+
 
 def feladat1():
+    # A sorok_lista név globális változóként történő használatának lehetővé tétele (tartalmának módosíthatóságához)
+    global sorok_lista
+    kiirando = ""
     
-    lista=szoveg.strip().split('**')
-    for i in range (len(lista)):
-        lista[i]=lista[i].strip()
+    # A beolvasott szöveg végéről az Enter eltávolítása (strip), majd a szöveg feldarabolása '**' karakterpáros mentén
+    sorok_lista = szoveg.strip().split('**')
+    
+    # A feldarabolt szövegrészek elejéről és végéről a szóközök eltávolítása
+    for i in range (len(sorok_lista)):
+        sorok_lista[i] = sorok_lista[i].strip()
+
     db = 0
-    for i in range (len(lista)):
-        if (len(lista[i]) > 0):
-            lista[db] = lista[i]
+    
+    # A lista elejére másoljuk a nem üres elemeket
+    for i in range (len(sorok_lista)):
+        if (len(sorok_lista[i]) > 0):
+            sorok_lista[db] = sorok_lista[i]
             db += 1
-    for i in range(db,len(lista)):
-        lista.pop()
     
-    for sz in lista:
-        kiir += sz + "\n"
+    # A lista végéről eltávolítjuk a felesleges elemeket
+    for i in range(db,len(sorok_lista)):
+        sorok_lista.pop()
     
-    
-    return kiir
+    # A fájlba írandó sor a 4. listaelem
+    kiirando = sorok_lista[3]
 
+    return kiirando
+
+
+def feladat2():
+    # A sorok_lista név globális változóként történő használatának lehetővé tétele (tartalmának módosíthatóságához)
+    global sorok_lista
+
+    # Minden listaelem kisbetűssé alakítása
+    for i in range(len(sorok_lista)):
+        sorok_lista[i] = sorok_lista[i].lower()
+
+    # Minden cím (minden páratlan indexű listaelem) első szavának nagybetűssé alakítása
+    for i in range(0, len(sorok_lista), 2):
+        
+        # A sor feldarabolása szóközöknél, hogy megkaphassuk a címben lévő szavakat
+        szavak = sorok_lista[i].split(' ')
+        
+        # Az első szó nagybetűssé alakítása
+        szavak[0] = szavak[0].upper()
+        
+        # A cím összefűzése már az új formátumú első szóval
+        uj_cim = ""
+        
+        for j in range(len(szavak) - 1):
+            uj_cim += szavak[j] + " "
+        
+        uj_cim += szavak[-1]
+        
+        sorok_lista[i] = uj_cim
+
+    
+def feladat3():    
+    # A szoveg változóból eltávolítjuk először a '.'-okat, majd a ','-ket, végül a '*'-okat
+    szoveg2 = szoveg.replace(".", "").replace(",", "").replace(":", "").replace("*", "")
+    
+    # A szöveget alkotó szavak listáját a szöveg szóközök mentén történő feldarabolásával kapjuk meg. A darabolás előtt eltávolítjuk a szöveg végéről az Entert (strip).
+    szo_lista = szoveg2.strip().split(' ')
+        
+    return szo_lista
+
+
+def feladat4():
+    pass
+
+
+def feladat5():
+    pass
+
+
+def feladat6():
+    pass
+
+
+def feladat7():
+    pass
+
+
+
+#################################################
+###   A PROGRAM                               ###
+#################################################
+
+### GLOBÁLIS VÁLTOZÓK ###
+
+# Változó létrehozása a beolvasott szöveg tárolásához.
+szoveg = ""
+
+# A szekciókra tördelt szöveget tároló lista létrehozása a további feladatok megkönnyítésére.
+# Minden listaelem egy sornyi szöveget tárol majd.
+sorok_lista = []
+
+
+
+### VÉGREHAJTÁS ###
+
+adat_beolvasas_fajlbol()
+
+# Feladatok végrehajtása és az eredmények fájlba írása
 try:
-    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
-        for elem in lista4:
-            fajl.write(feladat1())
-            #fajl.write(feladat2())
-            #fajl.write(feladat3())
-            #fajl.write(feladat4())
-            #fajl.write(feladat5())
-            #fajl.write(feladat6())
-            #fajl.write(feladat7())         
+    with open("F1\\scifi_output.txt","w",encoding = 'utf-8')as fajl:
+        # 1. feladat
+        fajl.write(f"1. feladat:\n\t{feladat1()}\n\n")
+        
+        # 2. feladat               
+        feladat2()
+ 
+        sz = ""
+        for le in sorok_lista:
+            sz += le + " "
+                     
+        fajl.write(f"2. feladat:\n\t{sz.strip()}\n\n")
 
+        # 3. feladat
+        fajl.write(f"3. feladat:\n\tA szöveg {len(feladat3())} szóból áll.\n\n")
+        
+        # 4. feladat
 
+        # 5. feladat
+
+        # 6. feladat
+
+        # 7. feladat
+        
 except IOError as ex:
     print(ex)
 
 
 
+#################################################
+###   PROGRAM VÉGE                            ###
+#################################################
 
 
 
-
-
-
-    
-# 1. feladat:
-lista=szoveg.strip().split('**')
-for i in range (len(lista)):
-    lista[i]=lista[i].strip()
-"""for sor in lista:
-    if (len(sor)==0):
-        lista.remove(sor)
 """
-db = 0
-for i in range (len(lista)):
-    if (len(lista[i]) > 0):
-        lista[db] = lista[i]
-        db += 1
-for i in range(db,len(lista)):
-    lista.pop()
-#print(lista)
+#4. feladat
+aslista = []
 
-# 2. feladat:
-for i in range(len(lista)):
-    lista[i]=lista[i].lower()
-
-#print(lista)    
-
-for i in range(0, len(lista), 2):
-    lista2 = lista[i].split(' ')
-    lista2[0] = lista2[0].upper()
-    #lista[i] = lista2[0] + lista2[1]  
-    szo = " "
-    for j in range(len(lista2)):
-        szo += lista2[j] + " "   
-    lista[i] = szo.strip()    
-print(lista)
-
-try:
-    with open("scifi_output.txt","w",encoding = 'utf-8')as fajl:
-         for i in lista:
-             fajl.write(i + "\n") 
-        #print(szoveg)
-except IOError as ex:
-    print(ex)
-
-# 3. feladat:
-szoveg = szoveg.replace (',' ,'').replace ('.','').replace ('*','')
-print(szoveg)
-lista3 = szoveg.strip().split(' ')
-
-print(lista3)    
+for elem in sorok_lista:
+    if elem.lower().endswith("és") and elem not in aslista:
+        aslista.append(elem)
+print(aslista)
 
 try:
     with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
-         fajl.write (str(len(lista3))+"\n") 
+        
+        for elem in aslista:
+            fajl.write(elem+"\n")
+        
 except IOError as ex:
     print(ex)
 
-# 4. feladat:
-lista4 = []
 
-for elem in lista3:
-    if (elem.lower().endswith("és") and elem not in lista4):
-        lista4.append(elem)
+#5. feladat
+alista = []
 
-print(lista4)        
-print()        
+for elem in sorok_lista:
+    if elem.lower().startswith("a") and (elem.lower() not in ["a","az"]):
+        alista.append(elem)
+print(len(alista))
+
+
+#6. feladat
 try:
     with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
-        for elem in lista4:
-            fajl.write(elem + "\n")         
+        fajl.write(str(szoveg.find("jövőben")) + "\n")
 except IOError as ex:
     print(ex)
+    
+    
+#7.feladat
+hosszulista = []
 
-# 5. feladat:
-lista5 = []
-
-for elem in lista3:
-    if (elem.lower().startswith("a") and (elem.lower() != "a" and  elem.lower() != "az")):
-        lista5.append(elem)
-
-print(len(lista5))
-print()
-# 6. feladat:
-try:
-    with open("scifi_output.txt","a",encoding = 'utf-8')as fajl:
-        for elem in lista4:
-            fajl.write(str(szoveg.find("jövőben")) + "\n")         
-except IOError as ex:
-    print(ex)
-
-# 7. feladat:
-lista5 = []
-
-for elem in lista3:
-    elem = elem.lower()
-    if (len(elem) >= 10 and elem not in lista5 ):
-        lista5.append(elem)
-lista5.sort()
-print(lista5)
+for elem in sorok_lista:
+    elem=elem.lower()
+    if len(elem)>=10 and elem not in hosszulista:
+        hosszulista.append(elem)
+hosszulista.sort()
+print(hosszulista)
 
 try:
     with open("output.txt","w",encoding = 'utf-8')as fajl:
-        for elem in lista5:
-            fajl.write(elem + "\n")         
+        
+        for elem in hosszulista:
+            fajl.write(elem+"\n")
+        
 except IOError as ex:
     print(ex)
-
-print("FELADAT VÉGE")
+"""
