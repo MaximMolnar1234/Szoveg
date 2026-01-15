@@ -1,43 +1,68 @@
-#FÁJLBEOLVASÁS
-#====================================================================
-lista = []
+#1. feladat
+import string
+szoveg = ''
+
 try:
-    with open("input.txt",encoding = 'utf-8') as fajl:
-        lista = fajl.read()
+    with open ("F3//input.txt", "r", encoding="utf-8") as file:
+        szoveg = file.read()
+        
 except IOError as hiba:
     print(hiba)
-#====================================================================
-#print(lista)
+
+def feladat1():
+    szoveg_szelet = szoveg.strip().split('\n')
+    karakterek = 0
+        
+    for szoveg1 in szoveg_szelet:
+        karakterek += len(szoveg1)
     
-# 1. FELADAT:
-def feladat_1():
+    return karakterek
 
-    szoveg_szelet = lista.strip().split('\n')            
-    karakterhossz = 0
-
-    for lista in szoveg_szelet:
-        karakterhossz += len(lista)
-    return karakterhossz
-
-#print(len(lista))
-
-def feladat_1_2():
-    szavak = lista.split(' ')
+def feladat1_2():
+    szavak = szoveg.split(' ')
+    
     return len(szavak)
 
+def feladat2():
+    kisbetus = szoveg.lower()
+    
+    for i in kisbetus:
+        if i in string.punctuation:
+            kisbetus = kisbetus.replace(i,"")
+    
+    return kisbetus
+
+def feladat3():
+    pass
+
+def feladat4():
+    kulcsszo = []
+    
+    szavak = feladat2().strip()
+    szavak2 = szavak.split(' ')
+    
+    for szo in szavak2:
+        if len(szo) >= 7 and szavak.count(szo) >= 2:
+            if szo not in kulcsszo:
+                kulcsszo.append(szo)
+
+    return kulcsszo
+
+            
+            
+        
+       
+
+# ****************************
+#  A PROGRAM
+# ****************************
+
 try:
-    with open("output.txt",'w',encoding = 'utf-8') as fajl:
-        fajl.write(f"1. feladat: \n {feladat_1}")
-        fajl.write(f"1_2.feladat: \n {feladat_1_2} ")
+    with open ("output.txt", "w", encoding="utf-8") as file:
+        file.write(f"1.feladat: {feladat1()}    \n")
+        file.write(f"1_2. feladat: {feladat1_2()}    \n")
+        file.write(f"4 feladat: {sorted(feladat4())}   \n")
 except IOError as hiba:
     print(hiba)
-
-
-#====================================================================
-print(f"1. feladat: \n  Számold meg és írd ki az output.txt elejére a szövegben található KARAKTEREK és SZAVAK teljes számát. Karekterek száma: {feladat_1} \n ")
-
-
-
-
-
-#====================================================================    
+    
+print(feladat2())
