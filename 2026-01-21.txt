@@ -1,0 +1,6 @@
+
+Forrás: F1-2024dec.csv
+
+Feladat: Minden versenyző volt első helyezett?
+
+

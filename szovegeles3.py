@@ -3,7 +3,7 @@ import string
 szoveg = ''
 
 try:
-    with open ("F3//input.txt", "r", encoding="utf-8") as file:
+    with open ("input.txt", "r", encoding="utf-8") as file:
         szoveg = file.read()
         
 except IOError as hiba:
@@ -49,9 +49,19 @@ def feladat4():
     return kulcsszo
 
             
+def leghosszabb_mondat():
+    mondatok = []
+    
+    szoveg2 = szoveg.strip().replace("\n", " ")            
+     
+    for i in(len(szoveg2)):
+        if ("." in szoveg2[i] or "?" in szoveg2[i] or "!" in szoveg2[i]):
+            mondatok.append(szoveg2[:i+1])
             
-        
-       
+            szoveg2 = szoveg2[i+1:] 
+    
+    print(len(mondatok))    
+    print(f"6.feladat:\n\n\n{szoveg2}")  
 
 # ****************************
 #  A PROGRAM
