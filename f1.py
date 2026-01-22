@@ -22,28 +22,52 @@ versenyzo_adatok = []
 elso = [verseny_adatok[0][2], verseny_adatok[0][1]]
 versenyzo_adatok.append(elso)
 
-for i in range(1, len(verseny_adatok)):
-    j = 0
-    while j < len(versenyzo_adatok) and versenyzo_adatok[j][0] != verseny_adatok[i][2]:
-        j += 1
+def listaval():
+    for i in range(1, len(verseny_adatok)):
+        j = 0
+        while j < len(versenyzo_adatok) and versenyzo_adatok[j][0] != verseny_adatok[i][2]:
+            j += 1
 
-    if j >= len(versenyzo_adatok):
-        uj = [verseny_adatok[i][2], verseny_adatok[i][1]]
-        versenyzo_adatok.append(uj)
-    else:
-        if versenyzo_adatok[j][1] > verseny_adatok[i][1]:
-            versenyzo_adatok[j][1] = verseny_adatok[i][1]
+        if j >= len(versenyzo_adatok):
+            uj = [verseny_adatok[i][2], verseny_adatok[i][1]]
+            versenyzo_adatok.append(uj)
+        else:
+            if versenyzo_adatok[j][1] > verseny_adatok[i][1]:
+                versenyzo_adatok[j][1] = verseny_adatok[i][1]
 
 #print(versenyzo_adatok)
 
-i = 0
-while i < len(versenyzo_adatok) and versenyzo_adatok[i][1] == 1:
-    i +=1
+    i = 0
+    while i < len(versenyzo_adatok) and versenyzo_adatok[i][1] == 1:
+        i +=1
 
-if i >= len(versenyzo_adatok):
-    print(f"Minden versenyzo volt elso helyezett!")
+    if i >= len(versenyzo_adatok):
+        print(f"Minden versenyzo volt elso helyezett!")
+    else:
+        print(f"Nem minden versenyzo volt elso helyezett! Pl.: {versenyzo_adatok[i][0]}")
+
+versenyzo_adatok2 = {}
+
+for sor in verseny_adatok:
+    
+    if sor[2] in versenyzo_adatok2.keys():
+        if versenyzo_adatok2[sor[2]] > sor[1]:
+            versenyzo_adatok2[sor[2]] = sor[1]
+    else:
+        versenyzo_adatok2[sor[2]] = sor[1]
+
+print(versenyzo_adatok2)
+
+mindenki = True
+
+for ertek in versenyzo_adatok2.values():
+    if ertek > 1:
+        mindenki = False
+        break
+if mindenki:
+    print("Mindenki volt első.")
 else:
-    print(f"Nem minden versenyzo volt elso helyezett! Pl.: {versenyzo_adatok[i][0]}")
+    print("Nem mindenki volt első.")
+                          
 
-
-
+    
